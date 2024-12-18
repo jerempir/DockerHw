@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  db:
+    build: ./db
+    volumes:
+      - db-data:/data
+    container_name: sqlite_db
+
+  app:
+    build: ./app
+    depends_on:
+      - db
+    volumes:
+      - db-data:/data
+    container_name: app_entry
+
+volumes:
+  db-data:
